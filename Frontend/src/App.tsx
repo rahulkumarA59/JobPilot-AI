@@ -25,6 +25,9 @@ const NotificationsPage = lazy(() => import("@/pages/dashboard/NotificationsPage
 const ProfilePage = lazy(() => import("@/pages/dashboard/ProfilePage"));
 const SettingsPage = lazy(() => import("@/pages/dashboard/SettingsPage"));
 const JobDiscoveryDashboard = lazy(() => import("@/features/job-discovery/JobDiscoveryDashboard"));
+const SourceManager = lazy(() => import("@/features/job-discovery/SourceManager"));
+const MatchingDashboard = lazy(() => import("@/features/matching-engine/MatchingDashboard"));
+const CoverLetterDashboard = lazy(() => import("@/features/cover-letter/CoverLetterDashboard"));
 
 const NotFoundPage = lazy(() => import("@/pages/errors/NotFoundPage"));
 const ServerErrorPage = lazy(() => import("@/pages/errors/ServerErrorPage"));
@@ -82,6 +85,9 @@ export default function App() {
               <Route path="profile" element={<ProfilePage />} />
               <Route path="settings" element={<SettingsPage />} />
               <Route path="job-discovery" element={<JobDiscoveryDashboard />} />
+              <Route path="source-manager" element={<SourceManager />} />
+              <Route path="matching-engine" element={<MatchingDashboard />} />
+              <Route path="cover-letter" element={<CoverLetterDashboard />} />
             </Route>
 
             {/* Error Pages */}

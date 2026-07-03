@@ -1,7 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+import useJobDiscoveryStore from '@/store/jobDiscoveryStore';
+
 const JobDiscoveryDashboard = () => {
+  const {
+    totalJobsFoundToday,
+    newJobs,
+    jobsReadyForMatching,
+    duplicateJobsRemoved,
+    sourcesActive,
+    aiDiscoveryStatus,
+    recentJobSources,
+    discoveryActivity,
+  } = useJobDiscoveryStore();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -14,24 +27,28 @@ const JobDiscoveryDashboard = () => {
       {/* Dashboard Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
         {/* Example Card Structure */}
-        <Card title="Total Jobs Found Today" value="1,234" />
-        <Card title="New Jobs" value="250" />
-        <Card title="Jobs Ready for Matching" value="789" />
-        <Card title="Duplicate Jobs Removed" value="150" />
-        <Card title="Sources Active" value="6/8" />
-        <Card title="AI Discovery Status" value="Active" />
+        <Card title="Total Jobs Found Today" value={totalJobsFoundToday.toLocaleString()} />
+        <Card title="New Jobs" value={newJobs.toLocaleString()} />
+        <Card title="Jobs Ready for Matching" value={jobsReadyForMatching.toLocaleString()} />
+        <Card title="Duplicate Jobs Removed" value={duplicateJobsRemoved.toLocaleString()} />
+        <Card title="Sources Active" value={sourcesActive} />
+        <Card title="AI Discovery Status" value={aiDiscoveryStatus} />
       </div>
 
       {/* Recent Job Sources */}
       <section className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 glassmorphism">
         <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100">Recent Job Sources</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <SourceCard name="LinkedIn" status="Active" jobsFound={120} lastScan="2 mins ago" health="Good" />
-          <SourceCard name="Greenhouse" status="Active" jobsFound={80} lastScan="5 mins ago" health="Good" />
-          <SourceCard name="Lever" status="Active" jobsFound={50} lastScan="10 mins ago" health="Good" />
-          <SourceCard name="Workday" status="Inactive" jobsFound={0} lastScan="1 hour ago" health="Poor" />
-          <SourceCard name="Wellfound" status="Active" jobsFound={30} lastScan="15 mins ago" health="Good" />
-          <SourceCard name="Company Career Pages" status="Active" jobsFound={100} lastScan="3 mins ago" health="Good" />
+          {recentJobSources.map((source) => (
+            <SourceCard
+              key={source.name}
+              name={source.name}
+              status={source.status}
+              jobsFound={source.jobsFound}
+              lastScan={source.lastScan}
+              health={source.health}
+            />
+          ))}
         </div>
       </section>
 
@@ -40,10 +57,13 @@ const JobDiscoveryDashboard = () => {
         <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100">Discovery Activity</h2>
         <div className="relative pl-8">
           <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-blue-500"></div>
-          <TimelineItem time="09:15" description="Searching Greenhouse..." />
-          <TimelineItem time="09:16" description="Found 23 Jobs" />
-          <TimelineItem time="09:17" description="Removing Duplicates" />
-          <TimelineItem time="09:18" description="Ready for Matching" />
+          {discoveryActivity.map((activity, index) => (
+            <TimelineItem
+              key={index}
+              time={activity.time}
+              description={activity.description}
+            />
+          ))}
         </div>
       </section>
 
