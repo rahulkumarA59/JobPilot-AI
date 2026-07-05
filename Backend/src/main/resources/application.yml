@@ -20,6 +20,12 @@ server:
 jobpilot:
   application:
     version: 0.0.1-SNAPSHOT
+  security:
+    jwt:
+      secret: ${JWT_SECRET:jobpilot-ai-development-secret-key-change-before-production-0123456789}
+      issuer: jobpilot-ai
+      access-token-minutes: 15
+      refresh-token-days: 14
 
 logging:
   level:
