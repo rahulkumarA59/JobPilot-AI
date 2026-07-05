@@ -17,6 +17,10 @@ spring:
 server:
   port: 8080
 
+jobpilot:
+  application:
+    version: 0.0.1-SNAPSHOT
+
 logging:
   level:
     root: INFO
