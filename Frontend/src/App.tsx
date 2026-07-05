@@ -28,6 +28,7 @@ const JobDiscoveryDashboard = lazy(() => import("@/features/job-discovery/JobDis
 const SourceManager = lazy(() => import("@/features/job-discovery/SourceManager"));
 const MatchingDashboard = lazy(() => import("@/features/matching-engine/MatchingDashboard"));
 const CoverLetterDashboard = lazy(() => import("@/features/cover-letter/CoverLetterDashboard"));
+const BrowserAutomationDashboard = lazy(() => import("@/features/browser-automation/BrowserAutomationDashboard"));
 
 const NotFoundPage = lazy(() => import("@/pages/errors/NotFoundPage"));
 const ServerErrorPage = lazy(() => import("@/pages/errors/ServerErrorPage"));
@@ -88,6 +89,7 @@ export default function App() {
               <Route path="source-manager" element={<SourceManager />} />
               <Route path="matching-engine" element={<MatchingDashboard />} />
               <Route path="cover-letter" element={<CoverLetterDashboard />} />
+              <Route path="browser-automation" element={<BrowserAutomationDashboard />} />
             </Route>
 
             {/* Error Pages */}

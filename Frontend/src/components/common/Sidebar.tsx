@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard, Briefcase, Search, FileText, Video, Bell, User, Settings,
-  ChevronLeft, ChevronRight, Zap, LogOut, Crown, Bot, Sparkles, Building2
+  ChevronLeft, ChevronRight, Zap, LogOut, Crown, Bot, Sparkles, Building2, MonitorPlay
 } from "lucide-react";
 import { cn } from "@/utils";
 import { useAuthStore } from "@/store/authStore";
@@ -16,6 +16,7 @@ const navItems = [
   { href: "/dashboard/agent", label: "AI Agent", icon: Bot },
   { href: "/dashboard/resume-studio", label: "AI Resume Studio", icon: Sparkles },
   { href: "/dashboard/company-intelligence", label: "Company Intelligence", icon: Building2 },
+  { href: "/dashboard/browser-automation", label: "Browser Automation", icon: MonitorPlay },
   { href: "/dashboard/applications", label: "Applications", icon: Briefcase },
   { href: "/dashboard/jobs", label: "Job Search", icon: Search },
   { href: "/dashboard/resume", label: "Resume AI", icon: FileText },
