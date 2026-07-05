@@ -1,0 +1,2 @@
+-- Initial Flyway migration placeholder.
+-- Schema tables will be added when domain implementation begins.
