@@ -45,6 +45,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**", "/api/health").permitAll()
                         .anyRequest().authenticated()
                 )
+                .formLogin(AbstractHttpConfigurer::disable)
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
