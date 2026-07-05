@@ -24,7 +24,9 @@ const navItems = [
   { href: "/dashboard/notifications", label: "Notifications", icon: Bell, badge: true },
   { href: "/dashboard/profile", label: "Profile", icon: User },
   { href: "/dashboard/settings", label: "Settings", icon: Settings },
+  { href: "/dashboard/orchestrator", label: "AI Orchestrator", icon: Bot },
 ];
+
 
 export function Sidebar() {
   const location = useLocation();
