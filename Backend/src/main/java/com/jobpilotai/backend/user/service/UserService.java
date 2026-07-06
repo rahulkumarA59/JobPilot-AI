@@ -27,6 +27,15 @@ public class UserService {
         return toResponse(getByEmail(email));
     }
 
+    /**
+     * Get current authenticated user as User entity
+     * Used by services that need to work with User domain object
+     */
+    @Transactional(readOnly = true)
+    public User getCurrentUserEntity(String email) {
+        return getByEmail(email);
+    }
+
     public UserResponse toResponse(User user) {
         return new UserResponse(
                 user.getPublicId(),
