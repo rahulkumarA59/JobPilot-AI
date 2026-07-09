@@ -28,6 +28,7 @@ import java.util.UUID;
 })
 public class Job extends BaseEntity {
 
+    @org.hibernate.annotations.JdbcTypeCode(java.sql.Types.VARCHAR)
     @Column(name = "public_id", nullable = false, unique = true, length = 36)
     private UUID publicId;
 

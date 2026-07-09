@@ -1,0 +1,55 @@
+-- Migration for Job Source Connector module
+-- Creates tables for job companies and job postings
+
+CREATE TABLE IF NOT EXISTS job_companies (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    public_id VARCHAR(36) NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL,
+    website VARCHAR(500),
+    industry VARCHAR(150),
+    headquarters VARCHAR(200),
+    company_size VARCHAR(50),
+    logo_url VARCHAR(500),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    KEY idx_job_companies_public_id (public_id),
+    KEY idx_job_companies_name (name)
+) ;
+
+CREATE TABLE IF NOT EXISTS job_postings (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    public_id VARCHAR(36) NOT NULL UNIQUE,
+    source VARCHAR(30) NOT NULL,
+    external_job_id VARCHAR(255) NOT NULL,
+    company_id BIGINT NOT NULL,
+    company_name VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description LONGTEXT,
+    location VARCHAR(200),
+    remote_type VARCHAR(20),
+    employment_type VARCHAR(20),
+    experience_level VARCHAR(50),
+    salary_min BIGINT,
+    salary_max BIGINT,
+    currency VARCHAR(10),
+    skills LONGTEXT,
+    responsibilities LONGTEXT,
+    qualifications LONGTEXT,
+    benefits LONGTEXT,
+    apply_url VARCHAR(500),
+    job_url VARCHAR(500),
+    posted_date DATE,
+    expires_date DATE,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
+    checksum VARCHAR(64) NOT NULL UNIQUE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_source_external_id (source, external_job_id),
+    FOREIGN KEY (company_id) REFERENCES job_companies(id) ON DELETE CASCADE,
+    KEY idx_job_postings_public_id (public_id),
+    KEY idx_job_postings_checksum (checksum),
+    KEY idx_job_postings_company_id (company_id),
+    KEY idx_job_postings_active (active)
+) ;

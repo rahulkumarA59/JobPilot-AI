@@ -10,7 +10,7 @@ CREATE TABLE roles (
 
 CREATE TABLE users (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    public_id CHAR(36) NOT NULL,
+    public_id VARCHAR(36) NOT NULL,
     full_name VARCHAR(150) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password_hash VARCHAR(255) NOT NULL,

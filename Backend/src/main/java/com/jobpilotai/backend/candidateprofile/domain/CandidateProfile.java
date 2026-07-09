@@ -21,6 +21,7 @@ import java.util.UUID;
 @Table(name = "candidate_profiles")
 public class CandidateProfile extends AuditableEntity {
 
+    @org.hibernate.annotations.JdbcTypeCode(java.sql.Types.VARCHAR)
     @Column(name = "public_id", nullable = false, unique = true, length = 36)
     private UUID publicId;
 

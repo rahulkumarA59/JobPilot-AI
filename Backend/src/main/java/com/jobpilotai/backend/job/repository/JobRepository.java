@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,6 +29,13 @@ public interface JobRepository extends JpaRepository<Job, Long> {
 
     boolean existsBySourceAndExternalJobId(JobSource source, String externalJobId);
 
+    @Query("SELECT CASE WHEN COUNT(j) > 0 THEN true ELSE false END FROM Job j " +
+           "WHERE LOWER(j.company.name) = LOWER(:companyName) AND LOWER(j.title) = LOWER(:title) " +
+           "AND (:location IS NULL OR LOWER(j.location) = LOWER(:location))")
+    boolean existsByCompanyNameAndTitleAndLocation(@Param("companyName") String companyName,
+                                                    @Param("title") String title,
+                                                    @Param("location") String location);
+
     @Query("SELECT j FROM Job j WHERE j.status = :status ORDER BY j.postedDate DESC")
     Page<Job> findByStatus(@Param("status") JobStatus status, Pageable pageable);
 
@@ -36,4 +44,6 @@ public interface JobRepository extends JpaRepository<Job, Long> {
 
     @Query("SELECT j FROM Job j WHERE j.company.id = :companyId ORDER BY j.postedDate DESC")
     Page<Job> findByCompanyId(@Param("companyId") Long companyId, Pageable pageable);
+
+    long countByStatus(JobStatus status);
 }

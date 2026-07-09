@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS companies (
     PRIMARY KEY (id),
     KEY idx_companies_public_id (public_id),
     KEY idx_companies_name (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ;
 
 CREATE TABLE IF NOT EXISTS jobs (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS jobs (
     KEY idx_jobs_checksum (checksum),
     KEY idx_jobs_company_id (company_id),
     KEY idx_jobs_status (status)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ;
 
 CREATE TABLE IF NOT EXISTS job_skills (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS job_skills (
     PRIMARY KEY (id),
     FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE,
     KEY idx_job_skills_job_id (job_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ;
 
 CREATE TABLE IF NOT EXISTS job_benefits (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -73,4 +73,4 @@ CREATE TABLE IF NOT EXISTS job_benefits (
     PRIMARY KEY (id),
     FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE,
     KEY idx_job_benefits_job_id (job_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ;

@@ -5,7 +5,7 @@ CREATE TABLE resumes (
 
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
 
-    public_id CHAR(36) NOT NULL UNIQUE,
+    public_id VARCHAR(36) NOT NULL UNIQUE,
 
     user_id BIGINT NOT NULL,
 

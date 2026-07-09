@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS candidate_profiles (
     headline VARCHAR(200),
     summary VARCHAR(2000),
     total_experience_years INT,
-    current_role VARCHAR(150),
+    "current_role" VARCHAR(150),
     current_company VARCHAR(200),
     highest_education VARCHAR(150),
     current_location VARCHAR(150),
@@ -26,8 +26,8 @@ CREATE TABLE IF NOT EXISTS candidate_profiles (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (resume_id) REFERENCES resumes(id) ON DELETE CASCADE,
     KEY idx_user_resume (user_id, resume_id),
-    KEY idx_public_id (public_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    KEY idx_candidate_profiles_public_id (public_id)
+) ;
 
 CREATE TABLE IF NOT EXISTS candidate_skills (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -41,8 +41,8 @@ CREATE TABLE IF NOT EXISTS candidate_skills (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (profile_id) REFERENCES candidate_profiles(id) ON DELETE CASCADE,
-    KEY idx_profile (profile_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    KEY idx_candidate_skills_profile (profile_id)
+) ;
 
 CREATE TABLE IF NOT EXISTS candidate_experiences (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -56,15 +56,15 @@ CREATE TABLE IF NOT EXISTS candidate_experiences (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (profile_id) REFERENCES candidate_profiles(id) ON DELETE CASCADE,
-    KEY idx_profile (profile_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    KEY idx_candidate_experiences_profile (profile_id)
+) ;
 
 CREATE TABLE IF NOT EXISTS candidate_experience_technologies (
     experience_id BIGINT NOT NULL,
     technology VARCHAR(100) NOT NULL,
     FOREIGN KEY (experience_id) REFERENCES candidate_experiences(id) ON DELETE CASCADE,
     KEY idx_experience (experience_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ;
 
 CREATE TABLE IF NOT EXISTS candidate_projects (
     id BIGINT NOT NULL AUTO_INCREMENT,
@@ -77,12 +77,12 @@ CREATE TABLE IF NOT EXISTS candidate_projects (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (profile_id) REFERENCES candidate_profiles(id) ON DELETE CASCADE,
-    KEY idx_profile (profile_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    KEY idx_candidate_projects_profile (profile_id)
+) ;
 
 CREATE TABLE IF NOT EXISTS candidate_project_technologies (
     project_id BIGINT NOT NULL,
     technology VARCHAR(100) NOT NULL,
     FOREIGN KEY (project_id) REFERENCES candidate_projects(id) ON DELETE CASCADE,
     KEY idx_project (project_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ;

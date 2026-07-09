@@ -1,8 +1,15 @@
 spring:
   application:
     name: jobpilot-ai-backend
+
   profiles:
     active: dev
+
+  datasource:
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+
   jpa:
     open-in-view: false
     hibernate:
@@ -10,6 +17,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
   flyway:
     enabled: true
     locations: classpath:db/migration
@@ -25,6 +33,7 @@ app:
 jobpilot:
   application:
     version: 0.0.1-SNAPSHOT
+
   security:
     jwt:
       secret: ${JWT_SECRET:jobpilot-ai-development-secret-key-change-before-production-0123456789}
