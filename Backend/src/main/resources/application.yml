@@ -41,6 +41,15 @@ jobpilot:
       access-token-minutes: 15
       refresh-token-days: 14
 
+  ai:
+    gateway:
+      primary-provider: GEMINI
+      fallback-order:
+        - OPENAI
+        - CLAUDE
+      fallback-enabled: true
+      max-retries: 2
+
 logging:
   level:
     root: INFO
