@@ -49,6 +49,15 @@ jobpilot:
         - CLAUDE
       fallback-enabled: true
       max-retries: 2
+      providers:
+        gemini:
+          api-key: ${GEMINI_API_KEY:}
+          default-model: gemini-2.5-flash
+          temperature: 0.7
+          top-p: 0.95
+          top-k: 40
+          max-output-tokens: 8192
+          request-timeout: 30
 
 logging:
   level:
