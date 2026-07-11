@@ -59,6 +59,25 @@ jobpilot:
           max-output-tokens: 8192
           request-timeout: 30
 
+  automation:
+    dry-run: true
+    headless: true
+    screenshot-on-error: true
+    timeout-seconds: 30
+    max-applications-per-run: 10
+
+  job-sources:
+    greenhouse-boards:
+      - stripe
+      - figma
+      - notion
+    lever-companies:
+      - netflix
+      - cloudflare
+    ashby-companies:
+      - ramp
+      - linear
+
 logging:
   level:
     root: INFO
